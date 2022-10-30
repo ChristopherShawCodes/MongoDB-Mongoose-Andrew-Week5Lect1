@@ -7,34 +7,34 @@ Youtube: https://www.youtube.com/watch?v=CssaK8VDtkU
 ----------------------------------------
 Server.js File
 
-const express = require('express')
+    const express = require('express')
 
-const mongoose = require('mongoose')
+    const mongoose = require('mongoose')
 
-const app = express()
+    const app = express()
 
-const PORT = 8000
+    const PORT = 8000
 
-const DB = 'testdb3'
+    const DB = 'testdb3'
 
 //middleware to make post requests
 
-app.use(express.json())
+    app.use(express.json())
 
-app.use(express.urlencoded({extended: true}))
+    app.use(express.urlencoded({extended: true}))
 
 //connect to mongodb
 
-mongoose.connect(`mongodb://localhost/${DB}`, ()=>{
+    mongoose.connect(`mongodb://localhost/${DB}`, ()=>{
 
     console.log(`Connected to MongoDB ${DB}`)
     
-})
+    })
 
 
 //schema determines the blueprint for the documents
 
-const UserSchema = mongoose.Schema({
+    const UserSchema = mongoose.Schema({
 
     name: String,
     
@@ -42,13 +42,13 @@ const UserSchema = mongoose.Schema({
     
     developer: Boolean
     
-})
+    })
 
 //turns schema into a model which creates a collection in the database
 
-const User = mongoose.model('User', UserSchema)
+    const User = mongoose.model('User', UserSchema)
 
-app.post('/api/addUser', (req,res)=>{
+    app.post('/api/addUser', (req,res)=>{
 
     User.create(req.body)
     
@@ -58,9 +58,9 @@ app.post('/api/addUser', (req,res)=>{
         
     }).catch(err => console.log(err))
     
-})
+    })
 
-app.get('/api/allUsers', (req,res)=>{
+    app.get('/api/allUsers', (req,res)=>{
 
     User.find()
     
@@ -71,13 +71,13 @@ app.get('/api/allUsers', (req,res)=>{
         
     }).catch(err => console.log(err))
     
-})
+    })
 
-app.listen(PORT, () =>{
+    app.listen(PORT, () =>{
 
     console.log(`Server is up and running on port ${PORT}`)
     
-})
+    })
 
 //From here we can use Postman to POST  a user
 
